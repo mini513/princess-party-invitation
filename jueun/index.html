@@ -1,10 +1,17 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>20대 라스트 무도회</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="일신여고 1학년 2반, 여섯 공주의 20대 마지막 무도회 초대장">
+<meta property="og:title" content="20대 라스트 무도회">
+<meta property="og:description" content="앞자리가 2에서 3으로 넘어가기 전에 모여라 공주들아~~">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Jua&family=Gowun+Dodum&display=swap">
 
 <style>
-  /* 레이아웃: A4 한 장 포스터 — 타이틀 블록 / 정보 칩 4개 / 행사 2칸 / 회신 한 줄 */
+  /* 레이아웃: 세로 한 장 초대장 — 받는 사람 / 공주 / 타이틀 / 정보 칩 4개 / 행사 2칸 */
   :root {
     --bubble: #FF3D92;
     --grape: #7B3FE4;
@@ -22,9 +29,15 @@
   }
 
   * { box-sizing: border-box; }
+  img { max-width: 100%; }
+  [hidden] { display: none !important; }
+
+  html { -webkit-text-size-adjust: 100%; }
 
   body {
     margin: 0;
+    min-height: 100%;
+    padding-top: env(safe-area-inset-top, 0px);
     font-family: var(--body);
     color: var(--ink);
     background:
@@ -32,9 +45,11 @@
       radial-gradient(50rem 40rem at 95% 15%, #D9C6FF 0%, transparent 55%),
       radial-gradient(45rem 35rem at 50% 110%, #C7F2EE 0%, transparent 60%),
       #F3E7FF;
-    padding-left: max(16px, env(safe-area-inset-left, 0px));
-    padding-right: max(16px, env(safe-area-inset-right, 0px));
-    padding-block: clamp(14px, 4vw, 32px);
+    background-attachment: fixed;
+    padding-left: max(10px, env(safe-area-inset-left, 0px));
+    padding-right: max(10px, env(safe-area-inset-right, 0px));
+    padding-block: clamp(10px, 2.5vw, 28px);
+    padding-bottom: max(clamp(10px, 2.5vw, 28px), env(safe-area-inset-bottom, 0px));
     overflow-x: hidden;
   }
 
@@ -50,20 +65,19 @@
   .sheet {
     position: relative;
     z-index: 1;
-    max-width: 26rem;
+    max-width: 34rem;
     width: 100%;
     margin-inline: auto;
-    min-height: min(162vw, 44rem);
     background:
       radial-gradient(14rem 10rem at 50% -2%, #FFE6F4 0%, transparent 70%),
       var(--cream);
     border: 3px solid var(--ink);
     border-radius: 26px;
     box-shadow: 7px 9px 0 var(--grape), 7px 9px 0 3px var(--ink);
-    padding: clamp(20px, 5.5vw, 28px) clamp(16px, 4.8vw, 24px);
+    padding: clamp(22px, 5.5vw, 36px) clamp(18px, 4.6vw, 32px);
     display: flex;
     flex-direction: column;
-    gap: clamp(9px, 2.4vw, 14px);
+    gap: clamp(14px, 3.4vw, 22px);
   }
 
   /* 안쪽 레이스 테두리 */
@@ -96,7 +110,7 @@
 
   /* 공주 캐릭터 */
   .princess {
-    width: clamp(104px, 30vw, 138px);
+    width: clamp(132px, 40vw, 190px);
     margin-bottom: -6px;
     animation: shimmer 3.8s ease-in-out infinite;
   }
@@ -106,7 +120,7 @@
   .ptitle {
     margin: 2px 0 0;
     font-family: var(--round);
-    font-size: .72rem;
+    font-size: clamp(.78rem, 3.2vw, .9rem);
     letter-spacing: .18em;
     text-transform: uppercase;
     color: var(--pcolor, var(--grape));
@@ -133,11 +147,11 @@
 
   .tape {
     font-family: var(--round);
-    font-size: .82rem;
+    font-size: clamp(.88rem, 3.6vw, 1rem);
     letter-spacing: .06em;
     color: #fff;
     background: var(--grape);
-    padding: .3rem 1.1rem;
+    padding: .34rem 1.2rem;
     border-radius: 999px;
     transform: rotate(-2.5deg);
     box-shadow: 2px 3px 0 var(--ink);
@@ -145,7 +159,7 @@
 
   h1 {
     font-family: var(--display);
-    font-size: clamp(1.45rem, 7.4vw, 2.1rem);
+    font-size: clamp(1.75rem, 8.6vw, 2.75rem);
     line-height: 1.1;
     margin: 0;
     letter-spacing: -.02em;
@@ -156,7 +170,7 @@
 
   .sub {
     font-family: var(--round);
-    font-size: clamp(.6rem, 3vw, .82rem);
+    font-size: clamp(.7rem, 3.45vw, .98rem);
     color: var(--ink-soft);
     margin: 4px 0 0;
     white-space: nowrap;
@@ -172,7 +186,7 @@
     padding-bottom: .55rem;
     border-bottom: 2px dotted var(--lilac);
     font-family: var(--round);
-    font-size: clamp(.95rem, 4vw, 1.12rem);
+    font-size: clamp(1.02rem, 4.6vw, 1.3rem);
     color: var(--grape);
   }
   .to i {
@@ -184,16 +198,16 @@
   .chips {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
+    gap: clamp(9px, 2.4vw, 14px);
   }
   .chip {
     min-width: 0;
     background: #fff;
     border: 2.5px solid var(--ink);
-    border-radius: 14px;
-    padding: .55rem .7rem;
+    border-radius: 16px;
+    padding: .7rem .9rem;
     display: grid;
-    gap: 1px;
+    gap: 2px;
     box-shadow: 3px 4px 0 var(--lilac);
   }
   .chip:nth-child(2) { box-shadow: 3px 4px 0 var(--mint); }
@@ -202,14 +216,14 @@
 
   .chip span {
     font-family: var(--round);
-    font-size: .66rem;
+    font-size: clamp(.72rem, 2.9vw, .8rem);
     letter-spacing: .08em;
     color: var(--ink-soft);
   }
   .chip b {
     font-family: var(--round);
     font-weight: 400;
-    font-size: clamp(.86rem, 3.7vw, .98rem);
+    font-size: clamp(1rem, 4.2vw, 1.18rem);
     line-height: 1.3;
     color: var(--ink);
     font-variant-numeric: tabular-nums;
@@ -217,43 +231,43 @@
   .chip em {
     font-style: normal;
     font-family: var(--round);
-    font-size: .74rem;
-    line-height: 1.4;
+    font-size: clamp(.8rem, 3.2vw, .88rem);
+    line-height: 1.45;
     color: var(--ink-soft);
   }
   .chip em.cinderella { color: var(--grape); }
 
   /* ── 행사 ───────────────────────────── */
-  .events { display: grid; gap: 8px; }
+  .events { display: grid; gap: clamp(9px, 2.4vw, 14px); }
 
   .event {
     min-width: 0;
     border: 2.5px dashed var(--grape);
-    border-radius: 16px;
-    padding: .6rem .8rem .7rem;
+    border-radius: 18px;
+    padding: .8rem 1rem .9rem;
     background: linear-gradient(180deg, #fff, #FFF0F8);
     display: grid;
-    gap: .3rem;
+    gap: .45rem;
     align-content: start;
   }
   .event h2 {
     font-family: var(--round);
-    font-size: .95rem;
+    font-size: clamp(1.05rem, 4.4vw, 1.22rem);
     font-weight: 400;
     margin: 0;
     color: var(--bubble);
   }
   .event h2 small {
-    font-size: .62rem;
+    font-size: clamp(.68rem, 2.7vw, .76rem);
     letter-spacing: .1em;
     color: var(--ink-soft);
     margin-left: .45rem;
   }
-  .event ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .25rem; }
+  .event ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .4rem; }
   .event li {
     font-family: var(--round);
-    font-size: .8rem;
-    line-height: 1.5;
+    font-size: clamp(.88rem, 3.5vw, .98rem);
+    line-height: 1.55;
     min-width: 0;
   }
   .event li b {
@@ -586,14 +600,29 @@
     100% { opacity: 0; transform: scale(.2) translate(calc(var(--tx) * 2.2), calc(var(--ty) * 2.2)); }
   }
 
-  @media (max-width: 330px) {
-    .sheet { min-height: 0; }
+  /* 갤럭시 S24+ 384px · 아이폰 12 Pro 390px · 아이폰 15 393px — 종이가 화면을 꽉 채우는 구간 */
+  @media (min-width: 370px) and (max-width: 440px) {
+    body { padding-inline: max(8px, env(safe-area-inset-left, 0px)); }
+    .sheet { padding-inline: clamp(16px, 4.4vw, 22px); }
+  }
+
+  /* 태블릿·데스크톱: 가로 폭이 넉넉하면 행사 2열로 */
+  @media (min-width: 560px) {
+    .events { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* 아주 좁은 폰: 칩도 한 줄씩 */
+  @media (max-width: 340px) {
+    .chips { grid-template-columns: 1fr; }
   }
 
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
   }
 </style>
+
+</head>
+<body>
 
 <div id="splash" role="button" tabindex="0" aria-label="궁전 문 두드리기">
   <span class="moon">
@@ -1012,3 +1041,5 @@
   });
 })();
 </script>
+</body>
+</html>
