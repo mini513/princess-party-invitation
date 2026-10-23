@@ -96,11 +96,21 @@
 
   /* 공주 캐릭터 */
   .princess {
-    width: clamp(86px, 25vw, 118px);
+    width: clamp(104px, 30vw, 138px);
     margin-bottom: -6px;
     animation: shimmer 3.8s ease-in-out infinite;
   }
   .princess svg { display: block; width: 100%; height: auto; filter: drop-shadow(2px 4px 0 rgba(46,17,64,.18)); }
+
+  /* 공주별 칭호 */
+  .ptitle {
+    margin: 2px 0 0;
+    font-family: var(--round);
+    font-size: .72rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--pcolor, var(--grape));
+  }
   .princess .gem-a { animation: gem 1.8s ease-in-out infinite; }
   .princess .gem-b { animation: gem 1.8s ease-in-out .6s infinite; }
   .princess .gem-c { animation: gem 1.8s ease-in-out 1.2s infinite; }
