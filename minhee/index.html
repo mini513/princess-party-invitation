@@ -504,7 +504,7 @@
     top: 50%;
     opacity: 0;
   }
-  .pumpkin { width: clamp(52px, 16vw, 76px); margin: -26px 0 0 -26px; }
+  .pumpkin { width: clamp(84px, 26vw, 118px); margin: -46px 0 0 -42px; }
   .carriage { width: clamp(176px, 62vw, 250px); margin: -68px 0 0 -88px; }
   .pumpkin svg, .carriage svg { display: block; width: 100%; height: auto; }
 
@@ -931,12 +931,58 @@
     <span class="burst b3"></span>
 
     <span class="pumpkin">
-      <svg viewBox="0 0 60 56" fill="none" aria-hidden="true">
-        <path d="M27 10c0-4-3-6-6-7 4-2 8 0 9 4" fill="#4E7A2A"/>
-        <ellipse cx="30" cy="33" rx="27" ry="21" fill="#F58220"/>
-        <ellipse cx="30" cy="33" rx="17" ry="21" fill="#FF9F3D"/>
-        <ellipse cx="30" cy="33" rx="7" ry="21" fill="#FFB766"/>
-        <path d="M29 12h4v6h-4z" fill="#4E7A2A"/>
+      <svg viewBox="0 0 120 112" fill="none" aria-hidden="true">
+        <defs>
+          <radialGradient id="pkFlesh" cx="38%" cy="30%" r="76%">
+            <stop offset="0%" stop-color="#FFC978"/>
+            <stop offset="45%" stop-color="#F7922B"/>
+            <stop offset="100%" stop-color="#C85E0E"/>
+          </radialGradient>
+          <linearGradient id="pkStem" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#7FB44A"/>
+            <stop offset="100%" stop-color="#3E6B22"/>
+          </linearGradient>
+          <radialGradient id="pkLobe" cx="50%" cy="34%" r="62%">
+            <stop offset="0%" stop-color="#FFD089" stop-opacity=".85"/>
+            <stop offset="100%" stop-color="#F7922B" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+
+        <!-- 바닥 그림자 -->
+        <ellipse cx="60" cy="102" rx="38" ry="6" fill="#2E1140" opacity=".25"/>
+
+        <!-- 뒤쪽 골 -->
+        <ellipse cx="60" cy="62" rx="52" ry="42" fill="#D9700F"/>
+
+        <!-- 가운데 덩어리 -->
+        <ellipse cx="60" cy="62" rx="52" ry="42" fill="url(#pkFlesh)"/>
+
+        <!-- 세로 골 — 바깥에서 안쪽으로 겹친다 -->
+        <ellipse cx="60" cy="62" rx="38" ry="42" fill="url(#pkLobe)"/>
+        <ellipse cx="60" cy="62" rx="20" ry="42" fill="url(#pkLobe)"/>
+        <g stroke="#C85E0E" stroke-width="1.8" fill="none" opacity=".55" stroke-linecap="round">
+          <path d="M60 22c-8 12-12 26-12 40s4 28 12 40"/>
+          <path d="M60 22c8 12 12 26 12 40s-4 28-12 40"/>
+          <path d="M31 30c-6 10-9 21-9 32s3 22 9 32"/>
+          <path d="M89 30c6 10 9 21 9 32s-3 22-9 32"/>
+        </g>
+
+        <!-- 윤기 -->
+        <ellipse cx="40" cy="40" rx="16" ry="11" fill="#FFE3B0" opacity=".45" transform="rotate(-28 40 40)"/>
+        <ellipse cx="86" cy="76" rx="9" ry="16" fill="#FFD089" opacity=".25" transform="rotate(14 86 76)"/>
+
+        <!-- 꼭지 -->
+        <path d="M56 24c-1-8 1-14 5-17 3 3 4 9 3 17z" fill="url(#pkStem)"/>
+        <path d="M58 22c-1-7 0-12 2-15" stroke="#9BCB66" stroke-width="1.6" fill="none" opacity=".7"/>
+
+        <!-- 덩굴 -->
+        <path d="M64 12c7-6 15-5 18 2 2 6-2 11-7 10-4-1-5-5-2-7" stroke="#4E7A2A" stroke-width="3"
+              fill="none" stroke-linecap="round"/>
+        <path d="M50 14c-6-4-13-2-15 4" stroke="#4E7A2A" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+
+        <!-- 잎사귀 -->
+        <path d="M44 16c-9-7-20-6-24 2 8 7 19 6 24-2z" fill="#5B9435"/>
+        <path d="M44 16c-8-4-16-4-22 0" stroke="#3E6B22" stroke-width="1.4" fill="none" opacity=".6"/>
       </svg>
     </span>
 
