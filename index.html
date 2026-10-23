@@ -96,8 +96,8 @@
 
   /* 공주 캐릭터 */
   .princess {
-    width: clamp(112px, 32vw, 150px);
-    margin-bottom: -4px;
+    width: clamp(86px, 25vw, 118px);
+    margin-bottom: -6px;
     animation: shimmer 3.8s ease-in-out infinite;
   }
   .princess svg { display: block; width: 100%; height: auto; filter: drop-shadow(2px 4px 0 rgba(46,17,64,.18)); }
@@ -669,73 +669,97 @@
 
   <header>
     <span class="princess">
-      <svg viewBox="0 0 140 150" fill="none" aria-hidden="true">
-        <!-- 뒷머리 -->
-        <path d="M24 74c0-30 12-54 46-54s46 24 46 54c0 20-2 36-5 48-4-14-6-30-6-46-24 8-46 8-70 0 0 16-2 32-6 46-3-12-5-28-5-48z" fill="#241326"/>
-        <path d="M28 76c0 24 2 42 5 54-2-16-3-34-3-52z" fill="#3A2240"/>
+      <svg viewBox="0 0 150 230" fill="none" aria-hidden="true">
+        <!-- 바닥까지 흐르는 머리채 (뒤) -->
+        <path d="M30 86c-10 34-14 76-10 120 3 12 8 20 14 24-4-18-6-40-6-64 0-30 2-56 6-76z" fill="#140A16"/>
+        <path d="M120 86c10 34 14 76 10 120-3 12-8 20-14 24 4-18 6-40 6-64 0-30-2-56-6-76z" fill="#140A16"/>
+        <path d="M38 80c-8 38-10 82-6 124 2 14 6 22 11 26-3-20-4-44-4-70 0-30 2-58 5-80z" fill="#1F1020"/>
+        <path d="M112 80c8 38 10 82 6 124-2 14-6 22-11 26 3-20 4-44 4-70 0-30-2-58-5-80z" fill="#1F1020"/>
+
+        <!-- 머리채 윤기 -->
+        <path d="M44 104c-4 32-5 68-3 98M106 104c4 32 5 68 3 98" stroke="#4A2C52" stroke-width="3" opacity=".5" stroke-linecap="round"/>
+        <path d="M36 120c-2 28-2 58 0 84M114 120c2 28 2 58 0 84" stroke="#3A2140" stroke-width="2" opacity=".45" stroke-linecap="round"/>
+
+        <!-- 드레스 (라벤더 레이스업) -->
+        <path d="M75 150c-24 4-40 20-45 50-2 10-3 19-3 26h96c0-7-1-16-3-26-5-30-21-46-45-50z" fill="#7B3FE4"/>
+        <path d="M75 150c-13 2-23 8-30 18 8 8 19 12 30 12s22-4 30-12c-7-10-17-16-30-18z" fill="#9B63F0"/>
+        <path d="M63 160h24c3 14 4 26 3 36H60c-1-10 0-22 3-36z" fill="#C9A7FF"/>
+        <path d="M64 166h22M64 174h22M64 182h22M64 190h22" stroke="#7B3FE4" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M66 162l18 34M84 162l-18 34" stroke="#FFD166" stroke-width="1.4" opacity=".8"/>
+
+        <!-- 어깨 퍼프소매 -->
+        <ellipse cx="48" cy="160" rx="13" ry="11" fill="#FF9ECB"/>
+        <ellipse cx="102" cy="160" rx="13" ry="11" fill="#FF9ECB"/>
+        <ellipse cx="48" cy="158" rx="9" ry="7" fill="#FFBFDC"/>
+        <ellipse cx="102" cy="158" rx="9" ry="7" fill="#FFBFDC"/>
+
+        <!-- 목 -->
+        <path d="M65 136h20v16c0 4-4 7-10 7s-10-3-10-7z" fill="#EFC6AE"/>
+
+        <!-- 머리 실루엣 (얼굴 뒤) -->
+        <path d="M28 82c0-32 19-54 47-54s47 22 47 54c0 16-2 30-5 42-2-18-5-32-8-42-22 10-46 10-68 0-3 10-6 24-8 42-3-12-5-26-5-42z" fill="#1F1020"/>
+
+        <!-- 얼굴: 큰 눈이 들어갈 둥근 하트형 -->
+        <path d="M75 36c-21 0-34 15-34 35 0 10 2 20 5 28 5 14 17 24 29 24s24-10 29-24c3-8 5-18 5-28 0-20-13-35-34-35z" fill="#FDE4D3"/>
 
         <!-- 귀 -->
-        <ellipse cx="29" cy="76" rx="5" ry="7" fill="#F6D4C0"/>
-        <ellipse cx="111" cy="76" rx="5" ry="7" fill="#F6D4C0"/>
+        <ellipse cx="41" cy="90" rx="4.5" ry="7" fill="#F5D3BD"/>
+        <ellipse cx="109" cy="90" rx="4.5" ry="7" fill="#F5D3BD"/>
+        <circle cx="41" cy="99" r="2.6" fill="#fff"/>
+        <circle cx="109" cy="99" r="2.6" fill="#fff"/>
 
-        <!-- 얼굴 -->
-        <path d="M36 62c0-20 15-34 34-34s34 14 34 34v14c0 22-15 38-34 38S36 98 36 76z" fill="#FBE3D4"/>
-
-        <!-- 앞머리 (시스루뱅) -->
-        <path d="M34 62c0-24 16-40 36-40s36 16 36 40c0 4-1 7-2 9-3-10-8-16-14-19-5 9-9 14-12 16-1-7-3-12-5-15-4 8-9 13-14 15-2-5-4-9-5-13-6 4-11 9-14 17-4-3-6-6-6-10z" fill="#1C0E20"/>
-        <path d="M58 24c-6 10-9 20-9 30 2-9 6-17 11-23zM80 24c7 9 11 19 12 30-2-10-6-18-12-25z" fill="#3A2240" opacity=".8"/>
+        <!-- 앞머리 -->
+        <path d="M41 70c0-24 15-40 34-40s34 16 34 40c0 4-1 8-2 11-2-11-7-19-13-23-7 10-16 15-23 16s-15-2-21-7c-6 4-9 10-10 16-1-4-1-8-1-13z" fill="#1F1020"/>
+        <path d="M58 44c-5 9-8 19-8 29 1-11 4-21 9-28zM92 44c5 8 8 18 9 29-1-11-4-21-9-29z" fill="#3B2440" opacity=".6"/>
 
         <!-- 옆머리 -->
-        <path d="M34 60c-3 20-4 40-3 58 3-16 5-34 6-52zM106 60c3 20 4 40 3 58-3-16-5-34-6-52z" fill="#241326"/>
+        <path d="M43 68c-5 24-6 48-5 70 2-22 4-46 7-64zM107 68c5 24 6 48 5 70-2-22-4-46-7-64z" fill="#160B18"/>
 
         <!-- 눈썹 -->
-        <path d="M46 68c5-3 11-3 15 0M79 68c4-3 10-3 15 0" stroke="#2E1A2E" stroke-width="2.6" stroke-linecap="round"/>
+        <path d="M50 76c6-3 13-3 17 0M83 76c4-3 11-3 17 0" stroke="#2A1726" stroke-width="2.6" stroke-linecap="round"/>
 
-        <!-- 눈 -->
-        <g class="blink" style="transform-origin:53px 80px">
-          <ellipse cx="53" cy="80" rx="7.5" ry="8.5" fill="#fff"/>
-          <circle cx="53" cy="80" r="6" fill="#4A2E24"/>
-          <circle cx="53" cy="80" r="3" fill="#1C0E12"/>
-          <circle cx="55.5" cy="77.5" r="2.2" fill="#fff"/>
-          <path d="M45 74c4-4 12-4 16 0" stroke="#1C0E20" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <!-- 큰 눈 (라푼젤 스타일) -->
+        <g class="blink" style="transform-origin:58px 94px">
+          <ellipse cx="58" cy="94" rx="11" ry="12.5" fill="#fff"/>
+          <circle cx="58.5" cy="94.5" r="9.5" fill="#4E7A3A"/>
+          <circle cx="58.5" cy="94.5" r="8" fill="#6D9C4E"/>
+          <circle cx="58.5" cy="94.5" r="4.6" fill="#17110C"/>
+          <circle cx="61.5" cy="90.5" r="3.4" fill="#fff"/>
+          <circle cx="55" cy="98" r="1.7" fill="#fff" opacity=".8"/>
+          <path d="M47 90c3-8 7-11 11.5-11S67 82 70 90" stroke="#160B18" stroke-width="3.6" stroke-linecap="round" fill="none"/>
+          <path d="M47.5 89c-2-1.5-3.5-3-4.5-4.5M52 84.5c-1-2-1.5-3.5-2-5" stroke="#160B18" stroke-width="2.4" stroke-linecap="round"/>
         </g>
-        <g class="blink" style="transform-origin:87px 80px">
-          <ellipse cx="87" cy="80" rx="7.5" ry="8.5" fill="#fff"/>
-          <circle cx="87" cy="80" r="6" fill="#4A2E24"/>
-          <circle cx="87" cy="80" r="3" fill="#1C0E12"/>
-          <circle cx="89.5" cy="77.5" r="2.2" fill="#fff"/>
-          <path d="M79 74c4-4 12-4 16 0" stroke="#1C0E20" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <g class="blink" style="transform-origin:92px 94px">
+          <ellipse cx="92" cy="94" rx="11" ry="12.5" fill="#fff"/>
+          <circle cx="91.5" cy="94.5" r="9.5" fill="#4E7A3A"/>
+          <circle cx="91.5" cy="94.5" r="8" fill="#6D9C4E"/>
+          <circle cx="91.5" cy="94.5" r="4.6" fill="#17110C"/>
+          <circle cx="94.5" cy="90.5" r="3.4" fill="#fff"/>
+          <circle cx="88" cy="98" r="1.7" fill="#fff" opacity=".8"/>
+          <path d="M80 90c3-8 7-11 11.5-11S100 82 103 90" stroke="#160B18" stroke-width="3.6" stroke-linecap="round" fill="none"/>
+          <path d="M102.5 89c2-1.5 3.5-3 4.5-4.5M98 84.5c1-2 1.5-3.5 2-5" stroke="#160B18" stroke-width="2.4" stroke-linecap="round"/>
         </g>
 
         <!-- 볼터치 -->
-        <ellipse cx="46" cy="92" rx="7" ry="4.5" fill="#FF9EB5" opacity=".5"/>
-        <ellipse cx="94" cy="92" rx="7" ry="4.5" fill="#FF9EB5" opacity=".5"/>
+        <ellipse cx="51" cy="110" rx="8" ry="4.5" fill="#FF8FB0" opacity=".45"/>
+        <ellipse cx="99" cy="110" rx="8" ry="4.5" fill="#FF8FB0" opacity=".45"/>
 
-        <!-- 코·입 -->
-        <path d="M70 88v5" stroke="#E0A88E" stroke-width="2" stroke-linecap="round"/>
-        <path d="M63 101c4 4 10 4 14 0-2 5-5 7-7 7s-5-2-7-7z" fill="#E05A6E"/>
+        <!-- 코 -->
+        <path d="M75 106v4" stroke="#DDA088" stroke-width="1.8" stroke-linecap="round"/>
 
-        <!-- 진주 귀걸이 -->
-        <circle cx="29" cy="85" r="3" fill="#fff" stroke="#E8CFE0" stroke-width="1"/>
-        <circle cx="111" cy="85" r="3" fill="#fff" stroke="#E8CFE0" stroke-width="1"/>
-
-        <!-- 목 -->
-        <path d="M58 112h24v12H58z" fill="#F2D2BE"/>
+        <!-- 입 -->
+        <path d="M68 119c2.5-1.5 4.5-2 7-2s4.5.5 7 2c-2 5-4.5 7-7 7s-5-2-7-7z" fill="#D94F66"/>
+        <path d="M68 119c2.5 1 4.5 1.5 7 1.5s4.5-.5 7-1.5" stroke="#B83C52" stroke-width="1" fill="none"/>
 
         <!-- 진주 목걸이 -->
-        <path d="M54 118c5 8 11 12 16 12s11-4 16-12" stroke="#E8C96A" stroke-width="1.8" fill="none"/>
-        <circle cx="70" cy="130" r="3.2" fill="#fff" stroke="#E8CFE0" stroke-width="1"/>
-
-        <!-- 드레스 -->
-        <path d="M70 122c-18 2-30 12-34 28h68c-4-16-16-26-34-28z" fill="#FF3D92"/>
-        <path d="M70 122c-7 1-13 4-17 9 5 4 11 6 17 6s12-2 17-6c-4-5-10-8-17-9z" fill="#FF7AB5"/>
-        <path d="M36 150c2-9 7-16 14-21M104 150c-2-9-7-16-14-21" stroke="#FFB3D4" stroke-width="2" fill="none"/>
+        <path d="M60 144c4 9 10 13 15 13s11-4 15-13" stroke="#E8C96A" stroke-width="1.6" fill="none"/>
+        <circle cx="75" cy="157" r="3" fill="#fff"/>
 
         <!-- 티아라 -->
-        <path d="M44 42 52 26l10 11 8-17 8 17 10-11 8 16z" fill="#FFD166" stroke="#E0A42A" stroke-width="2.5" stroke-linejoin="round"/>
-        <circle class="gem-a" cx="70" cy="21" r="4.5" fill="#7BE0D6" stroke="#E0A42A" stroke-width="1.5"/>
-        <circle class="gem-b" cx="52" cy="26" r="3.2" fill="#FF3D92" stroke="#E0A42A" stroke-width="1.2"/>
-        <circle class="gem-c" cx="88" cy="26" r="3.2" fill="#C9A7FF" stroke="#E0A42A" stroke-width="1.2"/>
+        <path d="M51 48 59 32l9 11 7-17 7 17 9-11 8 16z" fill="#FFD166" stroke="#E0A42A" stroke-width="2.4" stroke-linejoin="round"/>
+        <circle class="gem-a" cx="75" cy="26" r="4.5" fill="#7BE0D6" stroke="#E0A42A" stroke-width="1.5"/>
+        <circle class="gem-b" cx="59" cy="32" r="3.2" fill="#FF3D92" stroke="#E0A42A" stroke-width="1.2"/>
+        <circle class="gem-c" cx="91" cy="32" r="3.2" fill="#C9A7FF" stroke="#E0A42A" stroke-width="1.2"/>
       </svg>
     </span>
     <p class="tape">일신여고 1학년 2반 · <span id="dday">D-57</span></p>
