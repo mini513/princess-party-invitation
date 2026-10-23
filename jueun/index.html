@@ -656,6 +656,42 @@
   }
   .flipwrap.flipped .flipinner { transform: rotateY(180deg); }
 
+  /* 끌고 있는 동안에는 손가락을 그대로 따라가도록 전환을 끈다 */
+  .flipwrap.dragging .flipinner { transition: none; }
+  .flipwrap.dragging * { user-select: none; }
+
+  /* 세로 스크롤은 브라우저에, 가로 쓸기는 이 페이지가 가져간다 */
+  .flipwrap { touch-action: pan-y; }
+
+  /* 마우스로 잡을 수 있다는 표시 */
+  @media (hover: hover) and (pointer: fine) {
+    .flipwrap { cursor: grab; }
+    .flipwrap.dragging { cursor: grabbing; }
+  }
+
+  /* 쓸어넘기라는 안내 — 좌우로 살랑인다 */
+  .swipetip {
+    position: relative;
+    z-index: 1;
+    max-width: 34rem;
+    margin: 10px auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    font-family: var(--round);
+    font-size: clamp(.8rem, 3.2vw, .88rem);
+    color: var(--grape);
+  }
+  .swipetip i {
+    font-style: normal;
+    animation: sway 1.8s ease-in-out infinite;
+  }
+  @keyframes sway {
+    0%, 100% { transform: translateX(-5px); }
+    50%      { transform: translateX(5px); }
+  }
+
   .face { backface-visibility: hidden; }
   .face.back {
     position: absolute;
@@ -663,67 +699,86 @@
     transform: rotateY(180deg);
   }
 
-  /* 뒷면: 공주 카드 */
+  /* 뒷면: 공주 카드 — 6공주 원본 카드 디자인을 따른다 */
   .card {
     height: 100%;
-    background: linear-gradient(170deg, #2E1140, #4A1E60 55%, #6A2A72);
-    border: 3px solid var(--ink);
+    background: #FFF6EE;
+    border: 3px solid #E9BE6A;
     border-radius: 26px;
     box-shadow: 7px 9px 0 var(--bubble), 7px 9px 0 3px var(--ink);
-    padding: clamp(20px, 5vw, 32px) clamp(16px, 4.4vw, 28px);
+    padding: clamp(22px, 5.5vw, 34px) clamp(18px, 4.6vw, 30px);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: clamp(10px, 2.6vw, 16px);
+    gap: clamp(6px, 1.6vw, 10px);
     text-align: center;
-    color: #fff;
+    color: #2B1A3A;
     overflow: hidden;
   }
   .card::before {
     content: "";
     position: absolute;
-    inset: 10px;
-    border: 2px dotted rgba(255,233,168,.5);
+    inset: 13px;
+    border: 1.5px dashed #E2C9A0;
     border-radius: 18px;
     pointer-events: none;
   }
 
   .cardart {
-    width: clamp(150px, 46vw, 215px);
-    background: var(--pbg, #FFF0F8);
-    border-radius: 50% 50% 22px 22px;
-    padding-top: 8px;
+    width: clamp(168px, 52vw, 240px);
+    aspect-ratio: 25 / 28;
+    background: var(--pbg, #FBD9DD);
+    border-radius: 50% 50% 24px 24px / 45% 45% 24px 24px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
   }
-  .cardart svg { display: block; width: 100%; height: auto; }
+  .cardart svg { display: block; width: 92%; height: auto; }
 
   .cardtitle {
+    margin: 10px 0 0;
     font-family: var(--round);
-    font-size: clamp(.76rem, 3.1vw, .86rem);
+    font-size: clamp(.74rem, 3vw, .84rem);
     letter-spacing: .2em;
-    color: #FFE9A8;
-    margin: 0;
+    color: var(--pcolor, #B0233A);
   }
   .cardname {
-    font-family: var(--display);
-    font-size: clamp(1.6rem, 7vw, 2.2rem);
     margin: 0;
-    color: #fff;
-    text-shadow: 2px 2px 0 var(--bubble), 4px 4px 0 var(--ink);
+    font-family: var(--display);
+    font-size: clamp(1.9rem, 8.5vw, 2.6rem);
+    line-height: 1.15;
+    color: #2B1A3A;
   }
   .cardline {
+    margin: 2px 0 0;
     font-family: var(--round);
-    font-size: clamp(.85rem, 3.4vw, .95rem);
-    color: #E6D4F0;
-    margin: 0;
-    line-height: 1.6;
+    font-size: clamp(.88rem, 3.5vw, 1rem);
+    color: #5A4566;
+    line-height: 1.55;
+  }
+  .cardtags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .cardtags span {
+    font-family: var(--round);
+    font-size: clamp(.76rem, 3vw, .84rem);
+    padding: .25rem .7rem;
+    border-radius: 999px;
+    background: var(--pbg, #FBD9DD);
+    color: var(--tagcolor, #8E1C30);
   }
   .cardfoot {
+    margin: 12px 0 0;
     font-family: var(--round);
-    font-size: clamp(.72rem, 2.9vw, .8rem);
+    font-size: clamp(.7rem, 2.8vw, .78rem);
     letter-spacing: .14em;
-    color: #C9A7FF;
-    margin: 0;
+    color: #A08BB0;
   }
 
   /* 버튼 */
@@ -1056,16 +1111,47 @@
 
 </article>
 
-<article class="sheet card face back" id="cardback">
-  <div class="cardart" id="cardart"></div>
-  <p class="cardtitle" id="cardtitle">PRINCESS</p>
-  <h2 class="cardname" id="cardname">공주</h2>
-  <p class="cardline">20대 라스트 무도회에<br>초대받은 공주</p>
+<article class="sheet card face back" id="cardback" style="--pcolor:#7E5BB8;--pbg:#E6DCF6;--tagcolor:#5E3E99">
+  <div class="cardart" id="cardart"><svg viewBox="0 0 200 240" role="img" aria-label="바람에 날리는 긴 머리, 눈웃음에 별 풍선을 든 라일락 드레스 공주">
+          <g fill="#FFFFFF" opacity=".85"><path d="M24 60 l3 8 l8 3 l-8 3 l-3 8 l-3 -8 l-8 -3 l8 -3 z"/><circle cx="40" cy="130" r="2"/><circle cx="176" cy="120" r="2"/></g>
+          <path d="M30 60 Q42 54 52 60 M24 80 Q36 74 46 80" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" opacity=".8"/>
+          <path d="M64 92 Q62 50 100 50 Q138 50 138 88 Q160 100 174 132 Q152 122 144 130 Q160 156 152 180 Q138 158 130 168 L134 190 Q100 196 66 190 Q58 140 64 92 Z" fill="#3A2622"/>
+          <path d="M82 158 Q100 164 118 158 Q146 196 162 232 Q100 246 38 232 Q54 196 82 158 Z" fill="#B79BE0"/>
+          <path d="M100 166 L100 236 M86 170 L70 232 M114 170 L130 232" stroke="#8C6CC4" stroke-width="1.5" opacity=".5"/>
+          <g fill="#FFF3B0"><path d="M70 200 l2 5 l5 2 l-5 2 l-2 5 l-2 -5 l-5 -2 l5 -2 z"/><path d="M118 188 l2 5 l5 2 l-5 2 l-2 5 l-2 -5 l-5 -2 l5 -2 z"/><path d="M134 218 l2 5 l5 2 l-5 2 l-2 5 l-2 -5 l-5 -2 l5 -2 z"/><path d="M92 218 l2 5 l5 2 l-5 2 l-2 5 l-2 -5 l-5 -2 l5 -2 z"/></g>
+          <path d="M38 232 Q48 240 58 233 Q68 241 79 234 Q89 242 100 235 Q111 242 121 234 Q132 241 142 233 Q152 240 162 232" fill="none" stroke="#E6DCF6" stroke-width="5"/>
+          <rect x="93" y="118" width="14" height="16" fill="#F3D2C3"/>
+          <path d="M80 132 Q100 126 120 132 L118 162 Q100 168 82 162 Z" fill="#B79BE0"/>
+          <path d="M88 130 Q100 140 112 130 Z" fill="#FBE2D5"/>
+          <path d="M81 155 Q100 161 119 155 L119 163 Q100 169 81 163 Z" fill="#8C6CC4"/>
+          <path d="M100 158 L92 152 L92 166 Z M100 158 L108 152 L108 166 Z" fill="#F2A7C3"/>
+          <ellipse cx="77" cy="138" rx="12" ry="11" fill="#D6C4F0"/><ellipse cx="123" cy="138" rx="12" ry="11" fill="#D6C4F0"/>
+          <path d="M70 146 Q64 164 74 178" stroke="#FBE2D5" stroke-width="8" fill="none" stroke-linecap="round"/>
+          <path d="M130 146 Q144 150 150 136" stroke="#FBE2D5" stroke-width="8" fill="none" stroke-linecap="round"/>
+          <path d="M152 134 Q150 90 160 60" stroke="#8C7AA8" stroke-width="1.5" fill="none"/>
+          <path d="M162 18 L169 34 L186 35 L173 46 L177 63 L162 54 L147 63 L151 46 L138 35 L155 34 Z" fill="#E8B4E0" stroke="#B57AC0" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M152 36 Q156 30 162 30" stroke="#FFFFFF" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".8"/>
+          <ellipse cx="100" cy="92" rx="34" ry="33" fill="#FBE2D5"/>
+          <path d="M66 86 Q66 54 100 53 Q134 54 134 86 Z" fill="#3A2622"/>
+          <path d="M78 62 Q90 57 104 58" stroke="#FFFFFF" stroke-width="3" opacity=".3" fill="none" stroke-linecap="round"/>
+          <path d="M122 64 L132 58 L130 70 Z" fill="#F2A7C3"/><circle cx="127" cy="65" r="3" fill="#E5677F"/>
+          <path d="M82 97 Q88 89 94 97" stroke="#2B1B1F" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+          <path d="M106 97 Q112 89 118 97" stroke="#2B1B1F" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+          <ellipse cx="79" cy="106" rx="8" ry="4.5" fill="#F4A7B4" opacity=".9"/><ellipse cx="121" cy="106" rx="8" ry="4.5" fill="#F4A7B4" opacity=".9"/>
+          <path d="M74 103 L77 101 M80 104 L83 102 M117 104 L120 102 M123 103 L126 101" stroke="#E5677F" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M89 107 Q100 124 111 107 Z" fill="#C2405A"/><path d="M95 116 Q100 120 105 116 Q100 113 95 116 Z" fill="#F08AA0"/>
+        </svg></div>
+  <p class="cardtitle" id="cardtitle">STAR BALLOON PRINCESS</p>
+  <h2 class="cardname" id="cardname">주은</h2>
+  <p class="cardline" id="cardline">눈이 사라지는 애교 웃음<br>파티의 귀여움 담당</p>
+  <div class="cardtags" id="cardtags"><span>#눈웃음</span><span>#바람머리</span><span>#별풍선</span></div>
   <p class="cardfoot">2026 · 12 · 19 · 청주</p>
 </article>
 
 </div>
 </div>
+
+<p class="swipetip" id="swipetip"><i>👈</i> 초대장을 옆으로 쓸어넘겨 보세요 <i>👉</i></p>
 
 <div class="acts">
   <button type="button" id="flipBtn">카드 보기 🔄</button>
@@ -1277,26 +1363,7 @@
   var saveBtn = document.getElementById('saveBtn');
   var hint = document.getElementById('hint');
 
-  // 앞면의 공주 그림과 칭호를 뒷면 카드에 복사한다
-  var art = document.querySelector('.princess');
-  var ptitle = document.querySelector('.ptitle');
-  var cardArt = document.getElementById('cardart');
-  var cardTitle = document.getElementById('cardtitle');
   var cardName = document.getElementById('cardname');
-
-  if (art) {
-    cardArt.innerHTML = art.innerHTML;
-    var pbg = art.style.getPropertyValue('--pbg');
-    if (pbg) cardArt.style.setProperty('--pbg', pbg);
-  }
-  if (ptitle) cardTitle.textContent = ptitle.textContent;
-
-  // TO 줄에서 이름을 꺼낸다: "Red Apple, 민희 공주" -> "민희 공주"
-  var toEl = document.querySelector('.to i');
-  if (toEl) {
-    var parts = toEl.textContent.split(',');
-    cardName.textContent = (parts.length > 1 ? parts[1] : parts[0]).trim();
-  }
 
   // 뒷면 높이를 앞면에 맞춘다 (absolute 라 스스로 높이를 못 가짐)
   function syncHeight() {
@@ -1306,15 +1373,98 @@
   syncHeight();
   window.addEventListener('resize', function () { setTimeout(syncHeight, 160); });
 
+  var inner = wrap.querySelector('.flipinner');
+
+  function setFlipped(on, scroll) {
+    wrap.classList.toggle('flipped', on);
+    inner.style.transform = '';          // 드래그 중 넣어둔 각도를 지운다
+    flipBtn.textContent = on ? '초대장 보기 🔄' : '카드 보기 🔄';
+    if (scroll) wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
   function flip() {
-    wrap.classList.toggle('flipped');
-    var back = wrap.classList.contains('flipped');
-    flipBtn.textContent = back ? '초대장 보기 🔄' : '카드 보기 🔄';
-    hint.textContent = back ? '' : '';
-    wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setFlipped(!wrap.classList.contains('flipped'), true);
   }
 
   flipBtn.addEventListener('click', flip);
+
+  // ── 쓸어서 뒤집기 (마우스·터치 공통) ───
+  // 세로로 움직이면 스크롤에 양보하고, 가로로 움직일 때만 종이를 돌린다.
+  var dragging = false;   // 가로 쓸기로 확정된 상태
+  var tracking = false;   // 방향을 아직 판단하는 중
+  var startX = 0, startY = 0, angle = 0, moved = 0;
+
+  function onDown(ev) {
+    if (ev.button !== undefined && ev.button !== 0) return;
+    if (ev.target.closest('button, a')) return;
+    tracking = true;
+    dragging = false;
+    moved = 0;
+    startX = ev.clientX;
+    startY = ev.clientY;
+    angle = wrap.classList.contains('flipped') ? 180 : 0;
+  }
+
+  function onMove(ev) {
+    if (!tracking) return;
+    var dx = ev.clientX - startX;
+    var dy = ev.clientY - startY;
+
+    if (!dragging) {
+      // 10px 넘게 움직이기 전에는 방향을 정하지 않는다
+      if (Math.abs(dx) < 10 && Math.abs(dy) < 10) return;
+      if (Math.abs(dy) > Math.abs(dx)) { tracking = false; return; }  // 세로 → 스크롤
+      dragging = true;
+      wrap.classList.add('dragging');
+      try { wrap.setPointerCapture(ev.pointerId); } catch (e) {}
+    }
+
+    ev.preventDefault();
+    moved = Math.abs(dx);
+    inner.style.transform = 'rotateY(' + (angle + (dx / wrap.offsetWidth) * 360) + 'deg)';
+  }
+
+  function onUp(ev) {
+    if (!tracking) return;
+    tracking = false;
+    if (!dragging) return;
+    dragging = false;
+    wrap.classList.remove('dragging');
+    try { wrap.releasePointerCapture(ev.pointerId); } catch (e) {}
+
+    // 종이 너비의 18% 넘게 쓸면 넘어가고, 아니면 제자리로 돌아온다
+    var ratio = (ev.clientX - startX) / wrap.offsetWidth;
+    setFlipped(
+      Math.abs(ratio) > 0.18
+        ? !wrap.classList.contains('flipped')
+        : wrap.classList.contains('flipped'),
+      false
+    );
+  }
+
+  wrap.addEventListener('pointerdown', onDown);
+  wrap.addEventListener('pointermove', onMove, { passive: false });
+  wrap.addEventListener('pointerup', onUp);
+  wrap.addEventListener('pointercancel', onUp);
+  wrap.addEventListener('dragstart', function (ev) { ev.preventDefault(); });
+
+  // 쓸어넘긴 직후의 클릭은 무시한다
+  wrap.addEventListener('click', function (ev) {
+    if (moved > 6) { ev.preventDefault(); ev.stopPropagation(); moved = 0; }
+  }, true);
+
+  // 한 번이라도 뒤집으면 안내를 감춘다
+  var tip = document.getElementById('swipetip');
+  var seen = false;
+  function hideTip() {
+    if (seen || !tip) return;
+    seen = true;
+    tip.style.transition = 'opacity .4s ease';
+    tip.style.opacity = '0';
+    setTimeout(function () { tip.hidden = true; }, 420);
+  }
+  wrap.addEventListener('pointerup', hideTip);
+  flipBtn.addEventListener('click', hideTip);
 
   // ── 사진으로 저장 ────────────────────
   var shot = document.getElementById('shot');
@@ -1348,21 +1498,10 @@
         hint.textContent = '';
         saveBtn.disabled = false;
 
-        // 데스크톱은 바로 내려받기, 모바일은 길게 눌러 저장
         var touch = window.matchMedia('(pointer: coarse)').matches;
-        if (touch) {
-          shotMsg.textContent = '이미지를 꾹 눌러서 저장하세요';
-        } else {
-          shotMsg.textContent = '내려받는 중... 안 되면 이미지를 우클릭해 저장하세요';
-          try {
-            var a = document.createElement('a');
-            a.href = url;
-            a.download = (cardName.textContent || '공주') + '_카드.png';
-            document.body.appendChild(a);
-            a.click();
-            a.remove();
-          } catch (e) { /* 브라우저가 막으면 위 안내대로 */ }
-        }
+        shotMsg.textContent = touch
+          ? '이미지를 꾹 눌러서 사진첩에 저장하세요'
+          : '이미지를 우클릭해서 저장하세요';
       }).catch(function () {
         hint.textContent = '저장에 실패했어요. 화면을 캡처해 주세요.';
         saveBtn.disabled = false;

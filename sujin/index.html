@@ -656,6 +656,42 @@
   }
   .flipwrap.flipped .flipinner { transform: rotateY(180deg); }
 
+  /* 끌고 있는 동안에는 손가락을 그대로 따라가도록 전환을 끈다 */
+  .flipwrap.dragging .flipinner { transition: none; }
+  .flipwrap.dragging * { user-select: none; }
+
+  /* 세로 스크롤은 브라우저에, 가로 쓸기는 이 페이지가 가져간다 */
+  .flipwrap { touch-action: pan-y; }
+
+  /* 마우스로 잡을 수 있다는 표시 */
+  @media (hover: hover) and (pointer: fine) {
+    .flipwrap { cursor: grab; }
+    .flipwrap.dragging { cursor: grabbing; }
+  }
+
+  /* 쓸어넘기라는 안내 — 좌우로 살랑인다 */
+  .swipetip {
+    position: relative;
+    z-index: 1;
+    max-width: 34rem;
+    margin: 10px auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    font-family: var(--round);
+    font-size: clamp(.8rem, 3.2vw, .88rem);
+    color: var(--grape);
+  }
+  .swipetip i {
+    font-style: normal;
+    animation: sway 1.8s ease-in-out infinite;
+  }
+  @keyframes sway {
+    0%, 100% { transform: translateX(-5px); }
+    50%      { transform: translateX(5px); }
+  }
+
   .face { backface-visibility: hidden; }
   .face.back {
     position: absolute;
@@ -663,67 +699,86 @@
     transform: rotateY(180deg);
   }
 
-  /* 뒷면: 공주 카드 */
+  /* 뒷면: 공주 카드 — 6공주 원본 카드 디자인을 따른다 */
   .card {
     height: 100%;
-    background: linear-gradient(170deg, #2E1140, #4A1E60 55%, #6A2A72);
-    border: 3px solid var(--ink);
+    background: #FFF6EE;
+    border: 3px solid #E9BE6A;
     border-radius: 26px;
     box-shadow: 7px 9px 0 var(--bubble), 7px 9px 0 3px var(--ink);
-    padding: clamp(20px, 5vw, 32px) clamp(16px, 4.4vw, 28px);
+    padding: clamp(22px, 5.5vw, 34px) clamp(18px, 4.6vw, 30px);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: clamp(10px, 2.6vw, 16px);
+    gap: clamp(6px, 1.6vw, 10px);
     text-align: center;
-    color: #fff;
+    color: #2B1A3A;
     overflow: hidden;
   }
   .card::before {
     content: "";
     position: absolute;
-    inset: 10px;
-    border: 2px dotted rgba(255,233,168,.5);
+    inset: 13px;
+    border: 1.5px dashed #E2C9A0;
     border-radius: 18px;
     pointer-events: none;
   }
 
   .cardart {
-    width: clamp(150px, 46vw, 215px);
-    background: var(--pbg, #FFF0F8);
-    border-radius: 50% 50% 22px 22px;
-    padding-top: 8px;
+    width: clamp(168px, 52vw, 240px);
+    aspect-ratio: 25 / 28;
+    background: var(--pbg, #FBD9DD);
+    border-radius: 50% 50% 24px 24px / 45% 45% 24px 24px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
   }
-  .cardart svg { display: block; width: 100%; height: auto; }
+  .cardart svg { display: block; width: 92%; height: auto; }
 
   .cardtitle {
+    margin: 10px 0 0;
     font-family: var(--round);
-    font-size: clamp(.76rem, 3.1vw, .86rem);
+    font-size: clamp(.74rem, 3vw, .84rem);
     letter-spacing: .2em;
-    color: #FFE9A8;
-    margin: 0;
+    color: var(--pcolor, #B0233A);
   }
   .cardname {
-    font-family: var(--display);
-    font-size: clamp(1.6rem, 7vw, 2.2rem);
     margin: 0;
-    color: #fff;
-    text-shadow: 2px 2px 0 var(--bubble), 4px 4px 0 var(--ink);
+    font-family: var(--display);
+    font-size: clamp(1.9rem, 8.5vw, 2.6rem);
+    line-height: 1.15;
+    color: #2B1A3A;
   }
   .cardline {
+    margin: 2px 0 0;
     font-family: var(--round);
-    font-size: clamp(.85rem, 3.4vw, .95rem);
-    color: #E6D4F0;
-    margin: 0;
-    line-height: 1.6;
+    font-size: clamp(.88rem, 3.5vw, 1rem);
+    color: #5A4566;
+    line-height: 1.55;
+  }
+  .cardtags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .cardtags span {
+    font-family: var(--round);
+    font-size: clamp(.76rem, 3vw, .84rem);
+    padding: .25rem .7rem;
+    border-radius: 999px;
+    background: var(--pbg, #FBD9DD);
+    color: var(--tagcolor, #8E1C30);
   }
   .cardfoot {
+    margin: 12px 0 0;
     font-family: var(--round);
-    font-size: clamp(.72rem, 2.9vw, .8rem);
+    font-size: clamp(.7rem, 2.8vw, .78rem);
     letter-spacing: .14em;
-    color: #C9A7FF;
-    margin: 0;
+    color: #A08BB0;
   }
 
   /* 버튼 */
@@ -1060,16 +1115,49 @@
 
 </article>
 
-<article class="sheet card face back" id="cardback">
-  <div class="cardart" id="cardart"></div>
-  <p class="cardtitle" id="cardtitle">PRINCESS</p>
-  <h2 class="cardname" id="cardname">공주</h2>
-  <p class="cardline">20대 라스트 무도회에<br>초대받은 공주</p>
+<article class="sheet card face back" id="cardback" style="--pcolor:#3F8040;--pbg:#D7EDCF;--tagcolor:#2E6630">
+  <div class="cardart" id="cardart"><svg viewBox="0 0 200 240" role="img" aria-label="단발머리에 개구리 왕관 머리띠, 연잎을 든 초록 드레스 공주">
+          <g fill="#FFFFFF" opacity=".8"><path d="M26 64 l3 8 l8 3 l-8 3 l-3 8 l-3 -8 l-8 -3 l8 -3 z"/><path d="M170 120 l2 6 l6 2 l-6 2 l-2 6 l-2 -6 l-6 -2 l6 -2 z"/><circle cx="168" cy="40" r="2"/></g>
+          <path d="M64 94 Q62 52 100 52 Q138 52 136 94 L138 124 Q120 130 100 126 Q80 130 62 124 Z" fill="#2A1E1C"/>
+          <path d="M82 158 Q100 164 118 158 Q146 196 162 232 Q100 246 38 232 Q54 196 82 158 Z" fill="#5BA35B"/>
+          <path d="M100 166 L100 236 M86 170 L70 232 M114 170 L130 232" stroke="#3F8040" stroke-width="1.5" opacity=".5"/>
+          <g fill="#86C47A"><path d="M66 214 a8 8 0 1 0 0.1 0 Z"/><circle cx="66" cy="214" r="8"/><circle cx="132" cy="206" r="7"/><circle cx="102" cy="222" r="6"/></g>
+          <g stroke="#5BA35B" stroke-width="2"><path d="M66 214 L72 208"/><path d="M132 206 L137 201"/><path d="M102 222 L106 218"/></g>
+          <path d="M38 232 Q48 240 58 233 Q68 241 79 234 Q89 242 100 235 Q111 242 121 234 Q132 241 142 233 Q152 240 162 232" fill="none" stroke="#C6E6BC" stroke-width="5"/>
+          <rect x="93" y="118" width="14" height="16" fill="#F3D2C3"/>
+          <path d="M80 132 Q100 126 120 132 L118 162 Q100 168 82 162 Z" fill="#5BA35B"/>
+          <path d="M88 130 Q100 140 112 130 Z" fill="#FBE2D5"/>
+          <path d="M81 155 Q100 161 119 155 L119 163 Q100 169 81 163 Z" fill="#F2C94C"/>
+          <ellipse cx="77" cy="138" rx="12" ry="11" fill="#86C47A"/><ellipse cx="123" cy="138" rx="12" ry="11" fill="#86C47A"/>
+          <path d="M70 146 Q64 164 74 178" stroke="#FBE2D5" stroke-width="8" fill="none" stroke-linecap="round"/>
+          <path d="M130 146 Q140 162 136 176" stroke="#FBE2D5" stroke-width="8" fill="none" stroke-linecap="round"/>
+          <ellipse cx="146" cy="184" rx="16" ry="10" fill="#4E9A4E"/><path d="M146 184 L160 180 L158 188 Z" fill="#D7EDCF"/>
+          <circle cx="142" cy="180" r="5" fill="#F7A8C4"/><circle cx="142" cy="180" r="2" fill="#F2C94C"/>
+          <ellipse cx="100" cy="92" rx="34" ry="33" fill="#FBE2D5"/>
+          <path d="M66 94 Q66 56 100 55 Q134 56 134 94 Q128 80 120 82 Q112 74 104 80 Q96 72 88 80 Q80 74 74 82 Q68 82 66 94 Z" fill="#2A1E1C"/>
+          <path d="M80 66 Q92 60 106 62" stroke="#FFFFFF" stroke-width="3" opacity=".3" fill="none" stroke-linecap="round"/>
+          <path d="M66 70 Q100 46 134 70" stroke="#4E9A4E" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <circle cx="76" cy="58" r="13" fill="#6DBB5E"/><circle cx="124" cy="58" r="13" fill="#6DBB5E"/>
+          <circle cx="76" cy="58" r="7.5" fill="#FFFFFF"/><circle cx="124" cy="58" r="7.5" fill="#FFFFFF"/>
+          <circle cx="77" cy="59" r="4" fill="#1E1418"/><circle cx="125" cy="59" r="4" fill="#1E1418"/>
+          <path d="M88 52 L90 36 L96 45 L100 32 L104 45 L110 36 L112 52 Z" fill="#F2C94C" stroke="#D9A82E" stroke-width="1.5" stroke-linejoin="round"/>
+          <circle cx="100" cy="46" r="2.5" fill="#E5677F"/>
+          <ellipse cx="88" cy="97" rx="4" ry="5.5" fill="#2B1B1F"/><ellipse cx="112" cy="97" rx="4" ry="5.5" fill="#2B1B1F"/>
+          <circle cx="89.5" cy="95" r="1.7" fill="#FFFFFF"/><circle cx="113.5" cy="95" r="1.7" fill="#FFFFFF"/>
+          <ellipse cx="80" cy="107" rx="7" ry="4" fill="#F4A7B4" opacity=".7"/><ellipse cx="120" cy="107" rx="7" ry="4" fill="#F4A7B4" opacity=".7"/>
+          <path d="M91 108 Q100 122 109 108 Z" fill="#C2405A"/><path d="M93 109 L107 109 L106 111 L94 111 Z" fill="#FFFFFF"/>
+        </svg></div>
+  <p class="cardtitle" id="cardtitle">FROG CROWN PRINCESS</p>
+  <h2 class="cardname" id="cardname">수진</h2>
+  <p class="cardline" id="cardline">시원한 웃음 한 번에<br>연못이 반짝이는 공주</p>
+  <div class="cardtags" id="cardtags"><span>#개구리왕관</span><span>#시원한웃음</span><span>#초록러버</span></div>
   <p class="cardfoot">2026 · 12 · 19 · 청주</p>
 </article>
 
 </div>
 </div>
+
+<p class="swipetip" id="swipetip"><i>👈</i> 초대장을 옆으로 쓸어넘겨 보세요 <i>👉</i></p>
 
 <div class="acts">
   <button type="button" id="flipBtn">카드 보기 🔄</button>
@@ -1281,26 +1369,7 @@
   var saveBtn = document.getElementById('saveBtn');
   var hint = document.getElementById('hint');
 
-  // 앞면의 공주 그림과 칭호를 뒷면 카드에 복사한다
-  var art = document.querySelector('.princess');
-  var ptitle = document.querySelector('.ptitle');
-  var cardArt = document.getElementById('cardart');
-  var cardTitle = document.getElementById('cardtitle');
   var cardName = document.getElementById('cardname');
-
-  if (art) {
-    cardArt.innerHTML = art.innerHTML;
-    var pbg = art.style.getPropertyValue('--pbg');
-    if (pbg) cardArt.style.setProperty('--pbg', pbg);
-  }
-  if (ptitle) cardTitle.textContent = ptitle.textContent;
-
-  // TO 줄에서 이름을 꺼낸다: "Red Apple, 민희 공주" -> "민희 공주"
-  var toEl = document.querySelector('.to i');
-  if (toEl) {
-    var parts = toEl.textContent.split(',');
-    cardName.textContent = (parts.length > 1 ? parts[1] : parts[0]).trim();
-  }
 
   // 뒷면 높이를 앞면에 맞춘다 (absolute 라 스스로 높이를 못 가짐)
   function syncHeight() {
@@ -1310,15 +1379,98 @@
   syncHeight();
   window.addEventListener('resize', function () { setTimeout(syncHeight, 160); });
 
+  var inner = wrap.querySelector('.flipinner');
+
+  function setFlipped(on, scroll) {
+    wrap.classList.toggle('flipped', on);
+    inner.style.transform = '';          // 드래그 중 넣어둔 각도를 지운다
+    flipBtn.textContent = on ? '초대장 보기 🔄' : '카드 보기 🔄';
+    if (scroll) wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
   function flip() {
-    wrap.classList.toggle('flipped');
-    var back = wrap.classList.contains('flipped');
-    flipBtn.textContent = back ? '초대장 보기 🔄' : '카드 보기 🔄';
-    hint.textContent = back ? '' : '';
-    wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setFlipped(!wrap.classList.contains('flipped'), true);
   }
 
   flipBtn.addEventListener('click', flip);
+
+  // ── 쓸어서 뒤집기 (마우스·터치 공통) ───
+  // 세로로 움직이면 스크롤에 양보하고, 가로로 움직일 때만 종이를 돌린다.
+  var dragging = false;   // 가로 쓸기로 확정된 상태
+  var tracking = false;   // 방향을 아직 판단하는 중
+  var startX = 0, startY = 0, angle = 0, moved = 0;
+
+  function onDown(ev) {
+    if (ev.button !== undefined && ev.button !== 0) return;
+    if (ev.target.closest('button, a')) return;
+    tracking = true;
+    dragging = false;
+    moved = 0;
+    startX = ev.clientX;
+    startY = ev.clientY;
+    angle = wrap.classList.contains('flipped') ? 180 : 0;
+  }
+
+  function onMove(ev) {
+    if (!tracking) return;
+    var dx = ev.clientX - startX;
+    var dy = ev.clientY - startY;
+
+    if (!dragging) {
+      // 10px 넘게 움직이기 전에는 방향을 정하지 않는다
+      if (Math.abs(dx) < 10 && Math.abs(dy) < 10) return;
+      if (Math.abs(dy) > Math.abs(dx)) { tracking = false; return; }  // 세로 → 스크롤
+      dragging = true;
+      wrap.classList.add('dragging');
+      try { wrap.setPointerCapture(ev.pointerId); } catch (e) {}
+    }
+
+    ev.preventDefault();
+    moved = Math.abs(dx);
+    inner.style.transform = 'rotateY(' + (angle + (dx / wrap.offsetWidth) * 360) + 'deg)';
+  }
+
+  function onUp(ev) {
+    if (!tracking) return;
+    tracking = false;
+    if (!dragging) return;
+    dragging = false;
+    wrap.classList.remove('dragging');
+    try { wrap.releasePointerCapture(ev.pointerId); } catch (e) {}
+
+    // 종이 너비의 18% 넘게 쓸면 넘어가고, 아니면 제자리로 돌아온다
+    var ratio = (ev.clientX - startX) / wrap.offsetWidth;
+    setFlipped(
+      Math.abs(ratio) > 0.18
+        ? !wrap.classList.contains('flipped')
+        : wrap.classList.contains('flipped'),
+      false
+    );
+  }
+
+  wrap.addEventListener('pointerdown', onDown);
+  wrap.addEventListener('pointermove', onMove, { passive: false });
+  wrap.addEventListener('pointerup', onUp);
+  wrap.addEventListener('pointercancel', onUp);
+  wrap.addEventListener('dragstart', function (ev) { ev.preventDefault(); });
+
+  // 쓸어넘긴 직후의 클릭은 무시한다
+  wrap.addEventListener('click', function (ev) {
+    if (moved > 6) { ev.preventDefault(); ev.stopPropagation(); moved = 0; }
+  }, true);
+
+  // 한 번이라도 뒤집으면 안내를 감춘다
+  var tip = document.getElementById('swipetip');
+  var seen = false;
+  function hideTip() {
+    if (seen || !tip) return;
+    seen = true;
+    tip.style.transition = 'opacity .4s ease';
+    tip.style.opacity = '0';
+    setTimeout(function () { tip.hidden = true; }, 420);
+  }
+  wrap.addEventListener('pointerup', hideTip);
+  flipBtn.addEventListener('click', hideTip);
 
   // ── 사진으로 저장 ────────────────────
   var shot = document.getElementById('shot');
@@ -1352,21 +1504,10 @@
         hint.textContent = '';
         saveBtn.disabled = false;
 
-        // 데스크톱은 바로 내려받기, 모바일은 길게 눌러 저장
         var touch = window.matchMedia('(pointer: coarse)').matches;
-        if (touch) {
-          shotMsg.textContent = '이미지를 꾹 눌러서 저장하세요';
-        } else {
-          shotMsg.textContent = '내려받는 중... 안 되면 이미지를 우클릭해 저장하세요';
-          try {
-            var a = document.createElement('a');
-            a.href = url;
-            a.download = (cardName.textContent || '공주') + '_카드.png';
-            document.body.appendChild(a);
-            a.click();
-            a.remove();
-          } catch (e) { /* 브라우저가 막으면 위 안내대로 */ }
-        }
+        shotMsg.textContent = touch
+          ? '이미지를 꾹 눌러서 사진첩에 저장하세요'
+          : '이미지를 우클릭해서 저장하세요';
       }).catch(function () {
         hint.textContent = '저장에 실패했어요. 화면을 캡처해 주세요.';
         saveBtn.disabled = false;
